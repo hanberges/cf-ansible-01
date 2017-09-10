@@ -1,6 +1,9 @@
 # vim:se ft=ansible
 # Replace all with group name to match your needs.
 - hosts: "{{ vmweb }}"
+  become: yes
+  become_method: sudo
+
   name: Installer l'application
   tasks:
     - name: Installer httpd
@@ -43,6 +46,9 @@
 
 # Replace host with the group name to match your needs.
 - hosts: "{{ vmdb }}"
+  become: yes
+  become_method: sudo
+
   name: Installer la base de données
   vars:
         dbname: "dbname"
