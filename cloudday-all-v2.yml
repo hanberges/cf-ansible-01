@@ -13,6 +13,7 @@
         - php
         - php-mysql
         - libsemanage-python
+        - firewalld
     - name: Installer la page index.php
       template:
         src: index.php.j2
@@ -62,6 +63,7 @@
         - mariadb-server
         - MySQL-python
         - php-mysql
+        - firewalld
     - name: Ouvrir les ports du firewall
       firewalld:
         state: enabled
