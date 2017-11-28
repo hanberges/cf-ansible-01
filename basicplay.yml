@@ -1,17 +1,22 @@
 - name: Basic Play
   hosts: "{{ vmname }}"
+  #hosts: all
   become: yes
   become_method: sudo
 
   tasks:
+    - name: Subcription-manager
+      redhat_subscription:
+        state: present
+        username: "{{rh_name}}"
+        password: "{{rh_pass}}"
+        autosubscribe: true
+
     - name: Installer les packages
       yum: name={{ item }} state=latest
       with_items:
         - httpd
         - php
-#        - php-mysql
-#        - libsemanage-python
-#        - firewalld
 
     - name: Activer httpd
       service:
