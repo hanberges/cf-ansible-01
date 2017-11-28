@@ -1,0 +1,8 @@
+- name: Basic Play 3
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Run the command
+      shell: echo "this is a sample text file" >> testfile.text
