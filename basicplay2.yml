@@ -1,0 +1,9 @@
+- name: Basic Play 2
+  hosts: "{{ vmname }}"
+  #hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Run the command
+      command: echo "this is a sample text file" >> testfile.text
