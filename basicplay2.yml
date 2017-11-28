@@ -6,4 +6,4 @@
 
   tasks:
     - name: Run the command
-      command: echo "this is a sample text file" >> testfile.text
+      shell: echo "this is a sample text file" >> testfile.text
