@@ -1,0 +1,39 @@
+- name: Basic Play
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Subcription-manager
+      redhat_subscription:
+        state: present
+        org_id: "5318211"
+        activationkey: "demo-cloud-day"
+        #autosubscribe: false
+
+    - name: Disable all repos
+      shell: subscription-manager repos --disable=*
+
+    - name: Enable Repo rhel-7-server-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-rpms
+
+    - name: Enable Repo rhel-7-server-rh-common-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-rh-common-rpms
+
+    - name: Enable Repo rhel-7-server-extras-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-extras-rpms
+
+    - name: Enable Repo rhel-7-server-supplementary-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-supplementary-rpms
+
+  #  - name: Installer les packages
+  #    yum: name={{ item }} state=latest
+  #    with_items:
+  #      - httpd
+  #      - php
+
+  #  - name: Activer httpd
+  #    service:
+  #      name: httpd
+  #      enabled: yes
+  #      state: started
