@@ -1,0 +1,70 @@
+- name: Deploy Web
+  hosts: all
+  become: yes
+  become_method: sudo
+
+
+  tasks:
+    - name: Add default gateway
+      shell: ip route add 0.0.0.0/0 via 192.168.0.2
+
+    - name: Subcription-manager
+      redhat_subscription:
+        state: present
+        org_id: "5318211"
+        activationkey: "demo-cloud-day"
+
+    - name: Disable all repos
+      shell: subscription-manager repos --disable=*
+
+    - name: Enable Repo rhel-7-server-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-rpms
+
+    - name: Enable Repo rhel-7-server-rh-common-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-rh-common-rpms
+
+    - name: Enable Repo rhel-7-server-extras-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-extras-rpms
+
+    - name: Enable Repo rhel-7-server-supplementary-rpms
+      shell: subscription-manager repos --enable=rhel-7-server-supplementary-rpms
+
+
+    - name: Installer les packages
+      yum: name={{ item }} state=latest
+      with_items:
+        - httpd
+        - php
+        - php-mysql
+        - libsemanage-python
+        - firewalld
+
+    - name: Installer la page index.php
+      template:
+        src: index.php.j2
+        dest: /var/www/html/index.php
+        backup: yes
+
+    - name: Installer l'application
+      copy: src={{ item }} dest=/var/www/html
+      with_fileglob:
+              - ../files/fonts/
+              - ../files/*
+
+    - name: Ouvrir les ports du firewall
+      firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
+      with_items:
+        - 80
+        - 443
+
+    - name: Configurer SELinux
+      seboolean:
+        state: yes
+        name: httpd_can_network_connect
+        persistent: yes
+
+    - name: Activer httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: started
