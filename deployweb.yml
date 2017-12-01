@@ -2,6 +2,8 @@
   hosts: all
   become: yes
   become_method: sudo
+  vars:
+        vmdb: "dummy"
 
 
   tasks:
@@ -10,7 +12,7 @@
 
     - name: Clean old repo
       shell: rm -f /etc/yum.repos.d/cd.repo
-      
+
     - name: Subcription-manager
       redhat_subscription:
         state: present
