@@ -6,6 +6,8 @@
         dbname: "dbname"
         dbuser: "dbusername"
         dbpass: "dbpass"
+        vmdb: "dummy"
+        vmweb: "dummy0"
 
   tasks:
     - name: Add default gateway
