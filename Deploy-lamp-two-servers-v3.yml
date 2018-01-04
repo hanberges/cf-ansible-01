@@ -58,7 +58,7 @@
 
     - name: Verifier que le serveur web est atteignable
       uri:
-        url: {{ ansible_ssh_host }}
+        url: "http://{{ ansible_ssh_host }}"
         status_code: 200
       ignore_errors: yes
 
