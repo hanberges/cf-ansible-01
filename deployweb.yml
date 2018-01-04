@@ -3,15 +3,15 @@
   become: yes
   become_method: sudo
   vars:
-        vmdb: "dummy"
+        vmdb: "vmdb"
 
 
   tasks:
-    - name: Add default gateway
-      shell: ip route add 0.0.0.0/0 via 192.168.0.2
+  #  - name: Add default gateway
+  #    shell: ip route add 0.0.0.0/0 via 192.168.0.2
 
-    - name: Clean old repo
-      shell: rm -f /etc/yum.repos.d/cd.repo
+  #  - name: Clean old repo
+  #    shell: rm -f /etc/yum.repos.d/cd.repo
 
     - name: Subcription-manager
       redhat_subscription:
@@ -19,20 +19,20 @@
         org_id: "5318211"
         activationkey: "demo-cloud-day"
 
-    - name: Disable all repos
-      shell: subscription-manager repos --disable=*
+  #  - name: Disable all repos
+  #    shell: subscription-manager repos --disable=*
 
-    - name: Enable Repo rhel-7-server-rpms
-      shell: subscription-manager repos --enable=rhel-7-server-rpms
+  #  - name: Enable Repo rhel-7-server-rpms
+  #    shell: subscription-manager repos --enable=rhel-7-server-rpms
 
-    - name: Enable Repo rhel-7-server-rh-common-rpms
-      shell: subscription-manager repos --enable=rhel-7-server-rh-common-rpms
+  #  - name: Enable Repo rhel-7-server-rh-common-rpms
+  #    shell: subscription-manager repos --enable=rhel-7-server-rh-common-rpms
 
-    - name: Enable Repo rhel-7-server-extras-rpms
-      shell: subscription-manager repos --enable=rhel-7-server-extras-rpms
+  #  - name: Enable Repo rhel-7-server-extras-rpms
+  #    shell: subscription-manager repos --enable=rhel-7-server-extras-rpms
 
-    - name: Enable Repo rhel-7-server-supplementary-rpms
-      shell: subscription-manager repos --enable=rhel-7-server-supplementary-rpms
+  #  - name: Enable Repo rhel-7-server-supplementary-rpms
+  #    shell: subscription-manager repos --enable=rhel-7-server-supplementary-rpms
 
 
     - name: Installer les packages

@@ -1,0 +1,17 @@
+---
+vmdb: ""
+dbname: "dbname"
+dbuser: "dbusername"
+dbpass: "dbpass"
+
+db_pkg:
+  - mariadb
+  - mariadb-server
+  - MySQL-python
+  - php-mysql
+  - firewalld
+
+firewall_services_db:
+  - mysql
+
+networkcnf_src: "/jinja2/etc_my.cnf.d_network.cnf.j2"

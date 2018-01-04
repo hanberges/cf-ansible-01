@@ -1,0 +1,15 @@
+---
+vmweb: ""
+
+web_packages:
+  - httpd
+  - php
+  - php-mysql
+  - libsemanage-python
+  - firewalld
+
+index_src: "/jinja2/index.php.j2"
+
+firewall_services_web:
+  - http
+  - https
