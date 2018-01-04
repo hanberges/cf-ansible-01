@@ -4,7 +4,7 @@ dbname: "dbname"
 dbuser: "dbusername"
 dbpass: "dbpass"
 
-db_pkg:
+db_packages:
   - mariadb
   - mariadb-server
   - MySQL-python
