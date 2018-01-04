@@ -56,6 +56,12 @@
         enabled: yes
         state: started
 
+    - name: Verifie que le serveur web est atteignable
+      uri:
+        url: http://"{{ ansible_ssh_host }}"
+        status_code: 200
+      ignore_errors: yes
+
 
 ############################################################################
 - name: Deploy DB server
