@@ -8,7 +8,7 @@ web_packages:
   - libsemanage-python
   - firewalld
 
-index_src: "/jinja2/index.php.j2"
+index_src: "jinja2/index.php.j2"
 
 firewall_services_web:
   - http

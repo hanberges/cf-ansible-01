@@ -14,4 +14,4 @@ db_pkg:
 firewall_services_db:
   - mysql
 
-networkcnf_src: "/jinja2/etc_my.cnf.d_network.cnf.j2"
+networkcnf_src: "jinja2/etc_my.cnf.d_network.cnf.j2"
