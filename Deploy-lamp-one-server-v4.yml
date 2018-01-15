@@ -1,0 +1,122 @@
+---
+- name: Deploy Web server
+  hosts: "{{ vmweb }}"
+#  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Inclure les variables web
+      include_vars: vars/lamp-var-1.yml
+
+    - name: Installer les packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ web_packages }}"
+
+    - name: Installer la page index
+      template:
+        src: "{{ index_src }}"
+        dest: /var/www/html/index.php
+        backup: yes
+
+    - name: Installer l'application
+      copy:
+        src: "{{ item }}"
+        dest: /var/www/html
+      with_fileglob:
+              - ../files/fonts/
+              - ../files/*
+
+    - name: Activer le service firewalld
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+
+    - name: Ouvrir les ports du firewall
+      firewalld:
+        state: enabled
+        zone: public
+        immediate: true
+        service: "{{ item }}"
+        permanent: true
+      with_items: "{{ firewall_services_web }}"
+
+    - name: Configurer SELinux
+      seboolean:
+        state: yes
+        name: httpd_can_network_connect
+        persistent: yes
+
+    - name: Activer le service httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+
+    - name: Verifier que le serveur web est atteignable
+      uri:
+        url: "http://{{ ansible_ssh_host }}"
+        status_code: 200
+      ignore_errors: yes
+
+
+############################################################################
+- name: Deploy DB server
+  hosts: "{{ vmweb }}"
+#  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Inclure les variables db
+      include_vars: vars/lamp-var-2.yml
+
+    - name: Installer les packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ db_packages }}"
+
+    - name: Activer le service firewalld
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+
+    - name: Ouvrir les ports du firewall
+      firewalld:
+        state: enabled
+        zone: public
+        immediate: true
+        service: "{{ item }}"
+        permanent: true
+      with_items: "{{ firewall_services_db }}"
+
+    - name: Configurer la base MariaDB
+      template:
+        src: "{{ networkcnf_src }}"
+        dest: /etc/my.cnf.d/network.cnf
+        backup: yes
+
+    - name: Activer le service MariaDB
+      service:
+        name: mariadb
+        enabled: yes
+        state: started
+
+    - name: Créer la base de données
+      mysql_db:
+        name: '{{ dbname }}'
+        encoding: utf8
+        state: present
+
+    - name: Créer les utilisateurs de la base de données
+      mysql_user:
+        name: '{{ dbuser }}'
+        state: present
+        host: '%'
+        password: '{{ dbpass }}'
+        priv: '*.*:ALL'
