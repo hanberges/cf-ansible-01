@@ -4,12 +4,15 @@
 #  hosts: all
   become: yes
   become_method: sudo
+  vars:
+    vmdb: "{{ vmweb }}"
 
   tasks:
-    - name: Inclure les variables web
-      include_vars: vars/lamp-var-1.yml
+    - name: Inclure les variables web et db
+      include_vars:
+        dir: 'vars'
 
-    - name: Installer les packages
+    - name: Installer les packages web
       yum:
         name: "{{ item }}"
         state: present
@@ -63,18 +66,10 @@
       ignore_errors: yes
 
 
-############################################################################
-- name: Deploy DB server
-  hosts: "{{ vmweb }}"
-#  hosts: all
-  become: yes
-  become_method: sudo
-
-  tasks:
     - name: Inclure les variables db
       include_vars: vars/lamp-var-2.yml
 
-    - name: Installer les packages
+    - name: Installer les packages db
       yum:
         name: "{{ item }}"
         state: present
