@@ -1,8 +1,22 @@
 ---
-vmdb: ""
+vmweb: ""
+vmdb: "{{ vmweb }}"
 dbname: "dbname"
 dbuser: "dbusername"
 dbpass: "dbpass"
+
+web_packages:
+  - httpd
+  - php
+  - php-mysql
+  - libsemanage-python
+  - firewalld
+
+index_src: "jinja2/index.php.j2"
+
+firewall_services_web:
+  - http
+  - https
 
 db_packages:
   - mariadb

@@ -1,16 +1,14 @@
 ---
-- name: Deploy Web server
+- name: Deploy Lamp server
   hosts: "{{ vmweb }}"
 #  hosts: all
   become: yes
   become_method: sudo
-  vars:
-    vmdb: "{{ vmweb }}"
 
   tasks:
     - name: Inclure les variables web et db
-      include_vars:
-        dir: 'vars'
+      include_vars: vars/lamp-var-all.yml
+
 
     - name: Installer les packages web
       yum:
@@ -65,9 +63,6 @@
         status_code: 200
       ignore_errors: yes
 
-
-    - name: Inclure les variables db
-      include_vars: vars/lamp-var-2.yml
 
     - name: Installer les packages db
       yum:
