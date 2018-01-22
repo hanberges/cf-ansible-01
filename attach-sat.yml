@@ -8,12 +8,17 @@
     - name: Inclure les variables
       include_vars: vars/rhpds-sat-var.yml
 
-    - name: Nettoyer le contenu de yum.repos.d
+    - name: Ansible delete file glob
+      find:
+        paths: /etc/yum.repos.d
+        patterns: "*.repo"
+      register: files_to_delete
+
+    - name: Ansible remove file glob
       file:
-        path: "{{ item }}"
+        path: "{{ item.path }}"
         state: absent
-      with_fileglob:
-        - "/etc/yum.repos.d/*"
+      with_items: "{{ files_to_delete.files }}"
 
     - name: Installer l'agent Katello
       yum:
