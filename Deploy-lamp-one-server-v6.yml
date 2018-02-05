@@ -10,7 +10,8 @@
       include_vars: vars/lamp-var-all.yml
 
     - name: Inclure les taches d'attachement a Satellite
-      include_tasks: tasks/task-attach-sat.yml
+      # include_tasks: tasks/task-attach-sat.yml ## requires ansible 2.4
+      include: tasks/task-attach-sat.yml
 
 
     - name: Installer les packages web
