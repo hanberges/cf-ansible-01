@@ -1,5 +1,5 @@
 ---
-vmweb: ""
+vmweb: "{{ inventory_hostname }}"
 vmdb: "{{ vmweb }}"
 dbname: "dbname"
 dbuser: "dbusername"
