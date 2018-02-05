@@ -25,3 +25,4 @@
         state: present
         activationkey: "{{ var_activationkey }}"
         org_id: "{{ var_org_id }}"
+      ignore_errors: True
