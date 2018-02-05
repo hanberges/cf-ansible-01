@@ -4,6 +4,8 @@
   hosts: all
   become: yes
   become_method: sudo
+  vars:
+    vmweb: "{{ ansible_hostname }}"
 
   tasks:
     - name: Inclure les variables web et db
