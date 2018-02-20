@@ -13,7 +13,7 @@
 
     - name: Inclure les taches d'attachement a Satellite
       # include_tasks: tasks/task-attach-sat.yml ## requires ansible 2.4
-      include: tasks/task-attach-sat.yml
+      include: tasks/task-attach-sat-2.yml
 
 
     - name: Installer les packages web
