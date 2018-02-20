@@ -5,7 +5,7 @@
     - name: Ansible delete file glob
       find:
         paths: /etc/yum.repos.d
-        patterns: "*.repo"
+        patterns: '([\s\S]*?)(redhat.repo)'
       register: files_to_delete
 
     - name: Ansible remove file glob
