@@ -1,0 +1,442 @@
+---
+- description: ''
+  buttons: submit,cancel
+  label: OSP-RHEL-bundle-dialog
+  blueprint_id: 
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: OpenStack LAMP IaaS Provisioning
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: option_0_service_name
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: servicelamp1
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldTextBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: 
+      display: edit
+      label: Web VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_vm_name
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: vmweb1
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 0
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldTextBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_instance_type
+        description: ''
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '101000000000062'
+        values:
+        - - 101000000000062
+          - m1.tiny on OpenStack-Provider
+        - - 101000000000063
+          - m1.small on OpenStack-Provider
+        - - 101000000000064
+          - m1.medium on OpenStack-Provider
+        - - 101000000000065
+          - m1.large on OpenStack-Provider
+        - - 101000000000066
+          - m1.xlarge on OpenStack-Provider
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+          :sort_order: :ascending
+        label: Flavor
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/OpenStack
+          ae_class: DynamicDialogs
+          ae_instance: list_openstack_flavor_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_volume_0_size
+        description: 
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '0'
+        values:
+        - - 
+          - "<None>"
+        - - '0'
+          - Ephemeral
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Volume 0 Size (in GB)
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: false
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_floating_ip_address
+        description: ''
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '101000000000023'
+        values:
+        - - 101000000000023
+          - 10.39.167.34
+        - - 101000000000016
+          - 10.39.167.39
+        - - 101000000000017
+          - 10.39.167.36
+        - - 101000000000018
+          - 10.39.167.37
+        - - 101000000000021
+          - 10.39.167.40
+        - - 101000000000022
+          - 10.39.167.35
+        - - 101000000000020
+          - 10.39.167.32
+        - - 101000000000019
+          - 10.39.167.38
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+          :sort_order: :ascending
+        label: Floating IP
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: true
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: AnsibleTower/Integration/RedHat/OpenStack
+          ae_class: DynamicDialogs
+          ae_instance: list_openstack_floatingip_ids
+          ae_message: 
+          ae_attributes: {}
+    - description: 
+      display: edit
+      label: DB VM Information
+      display_method: 
+      display_method_options: 
+      position: 2
+      dialog_fields:
+      - name: option_2_vm_name
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: vmdb1
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 0
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldTextBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_2_instance_type
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '101000000000062'
+        values:
+        - - 101000000000062
+          - m1.tiny on OpenStack-Provider
+        - - 101000000000063
+          - m1.small on OpenStack-Provider
+        - - 101000000000064
+          - m1.medium on OpenStack-Provider
+        - - 101000000000065
+          - m1.large on OpenStack-Provider
+        - - 101000000000066
+          - m1.xlarge on OpenStack-Provider
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+          :sort_order: :ascending
+        label: Flavor
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Customizations/Integration/RedHat/OpenStack
+          ae_class: DynamicDialogs
+          ae_instance: list_openstack_flavor_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_2_volume_0_size
+        description: 
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '0'
+        values:
+        - - 
+          - "<None>"
+        - - '0'
+          - Ephemeral
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Volume 0 Size (in GB)
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: false
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_2_floating_ip_address
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '101000000000023'
+        values:
+        - - 101000000000023
+          - 10.39.167.34
+        - - 101000000000016
+          - 10.39.167.39
+        - - 101000000000017
+          - 10.39.167.36
+        - - 101000000000018
+          - 10.39.167.37
+        - - 101000000000021
+          - 10.39.167.40
+        - - 101000000000022
+          - 10.39.167.35
+        - - 101000000000020
+          - 10.39.167.32
+        - - 101000000000019
+          - 10.39.167.38
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+          :sort_order: :ascending
+        label: Floating IP
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: true
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: AnsibleTower/Integration/RedHat/OpenStack
+          ae_class: DynamicDialogs
+          ae_instance: list_openstack_floatingip_ids
+          ae_message: 
+          ae_attributes: {}
