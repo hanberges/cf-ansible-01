@@ -1,0 +1,85 @@
+---
+- name: Deploy Lamp server
+  hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+    vmweb: "{{ ansible_hostname }}"
+
+  tasks:
+    - name: Inclure les variables web et db
+      include_vars: vars/lamp-var-all.yml
+
+    - name: Retirer les utilisateurs de la base de données
+      mysql_user:
+        name: '{{ dbuser }}'
+        state: absent
+        host: '%'
+
+    - name: Supprimer la base de données
+      mysql_db:
+        name: '{{ dbname }}'
+        state: absent
+
+    - name: Desactiver le service MariaDB
+      service:
+        name: mariadb
+        enabled: no
+        state: stopped
+
+    - name: Deconfigurer la base MariaDB
+      file:
+        path: "/etc/my.cnf.d/network.cnf"
+        state: absent
+
+    - name: Fermer les ports Db du firewall
+      firewalld:
+        state: disabled
+        zone: public
+        immediate: true
+        service: "{{ item }}"
+        permanent: true
+      with_items: "{{ firewall_services_db }}"
+
+    - name: Désactiver le service firewalld
+      service:
+        name: firewalld
+        enabled: no
+        state: stopped
+
+    - name: Desinstaller les packages db
+      yum:
+        name: "{{ item }}"
+        state: absent
+      with_items: "{{ db_packages }}"
+
+    - name: Desactiver le service httpd
+      service:
+        name: httpd
+        enabled: no
+        state: stopped
+
+    - name: Fermer les ports Web du firewall
+      firewalld:
+        state: disabled
+        zone: public
+        immediate: true
+        service: "{{ item }}"
+        permanent: true
+      with_items: "{{ firewall_services_web }}"
+
+    - name: Desinstaller l'application
+      file:
+        path: "/var/www/html/files/*"
+        state: absent
+
+    - name: Desinstaller la page index
+      file:
+        path: "/var/www/html/index.php"
+        state: absent
+
+    - name: Desinstaller les packages web
+      yum:
+        name: "{{ item }}"
+        state: absent
+      with_items: "{{ web_packages }}"

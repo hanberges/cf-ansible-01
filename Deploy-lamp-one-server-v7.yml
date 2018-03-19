@@ -42,7 +42,7 @@
         enabled: yes
         state: started
 
-    - name: Ouvrir les ports du firewall
+    - name: Ouvrir les ports Web du firewall
       firewalld:
         state: enabled
         zone: public
@@ -82,7 +82,7 @@
         enabled: yes
         state: started
 
-    - name: Ouvrir les ports du firewall
+    - name: Ouvrir les ports Db du firewall
       firewalld:
         state: enabled
         zone: public
