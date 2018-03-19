@@ -41,18 +41,6 @@
         permanent: true
       with_items: "{{ firewall_services_db }}"
 
-    - name: Désactiver le service firewalld
-      service:
-        name: firewalld
-        enabled: no
-        state: stopped
-
-    - name: Desinstaller les packages db
-      yum:
-        name: "{{ item }}"
-        state: absent
-      with_items: "{{ db_packages }}"
-
     - name: Desactiver le service httpd
       service:
         name: httpd
@@ -68,6 +56,12 @@
         permanent: true
       with_items: "{{ firewall_services_web }}"
 
+    - name: Désactiver le service firewalld
+      service:
+        name: firewalld
+        enabled: no
+        state: stopped
+
     - name: Desinstaller l'application
       file:
         path: "/var/www/html/files/*"
@@ -77,6 +71,12 @@
       file:
         path: "/var/www/html/index.php"
         state: absent
+
+    - name: Desinstaller les packages db
+      yum:
+        name: "{{ item }}"
+        state: absent
+      with_items: "{{ db_packages }}"
 
     - name: Desinstaller les packages web
       yum:
