@@ -1,5 +1,5 @@
 ---
-- name: Deploy Lamp server
+- name: Remove Lamp server
   hosts: all
   become: yes
   become_method: sudo
