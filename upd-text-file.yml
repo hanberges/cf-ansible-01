@@ -1,0 +1,7 @@
+- name: update text file
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: shell command to append date to text file
+      shell: date +"This file has been updated at %c" >> dumpfile.txt 
