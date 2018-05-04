@@ -1,4 +1,5 @@
 - name: update text file
+  hosts: all
   become: yes
   become_method: sudo
 
