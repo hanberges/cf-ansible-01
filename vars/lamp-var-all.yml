@@ -4,6 +4,7 @@ vmdb: "{{ vmweb }}"
 dbname: "dbname"
 dbuser: "dbusername"
 dbpass: "dbpass"
+lib_db: "mariadb-libs"
 
 web_packages:
   - httpd
