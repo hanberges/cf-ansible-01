@@ -1,0 +1,8 @@
+---
+katello_path: http://sat.example.com/pub/katello-ca-consumer-latest.noarch.rpm
+
+# var_activationkey: rhel7-demo
+
+var_activationkey: rhel7
+
+var_org_id: Default_Organization
