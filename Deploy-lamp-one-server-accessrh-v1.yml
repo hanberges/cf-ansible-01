@@ -1,7 +1,7 @@
 ---
 - name: Deploy Lamp server
-  #hosts: all
-  hosts: "{{ instance_name }}"
+  hosts: all
+  #hosts: "{{ instance_name }}"
   become: yes
   become_method: sudo
   vars:
@@ -16,8 +16,9 @@
 
     - name: Installer les packages web
       yum:
-        name: "{{ web_packages }}"
+        name: "{{ item }}"
         state: present
+      with_items: "{{ web_packages }}"
 
     - name: Installer la page index
       template:
@@ -73,8 +74,9 @@
 
     - name: Installer les packages db
       yum:
-        name: "{{ db_packages }}"
+        name: "{{ item }}"
         state: present
+      with_items: "{{ db_packages }}"
 
 
     - name: Activer le service firewalld
