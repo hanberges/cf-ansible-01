@@ -1,7 +1,7 @@
 ---
 - name: Deploy Lamp server
-  hosts: all
-  #hosts: "{{ instance_name }}"
+  #hosts: all
+  hosts: "{{ instance_name }}"
   become: yes
   become_method: sudo
   vars:
