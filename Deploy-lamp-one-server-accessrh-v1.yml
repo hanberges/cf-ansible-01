@@ -66,10 +66,10 @@
         status_code: 200
       ignore_errors: yes
 
-    - name: Désinstaller les libs DB
-      yum:
-        name: "{{ lib_db }}"
-        state: absent
+  #  - name: Désinstaller les libs DB
+  #    yum:
+  #      name: "{{ lib_db }}"
+  #      state: absent
 
     - name: Installer les packages db
       yum:
