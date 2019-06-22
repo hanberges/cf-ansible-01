@@ -16,9 +16,9 @@
 
     - name: Installer les packages web
       yum:
-        name: "{{ item }}"
+        name: "{{ web_packages }}"
         state: present
-      with_items: "{{ web_packages }}"
+
 
     - name: Installer la page index
       template:
@@ -74,9 +74,9 @@
 
     - name: Installer les packages db
       yum:
-        name: "{{ item }}"
+        name: "{{ db_packages }}"
         state: present
-      with_items: "{{ db_packages }}"
+      
 
 
     - name: Activer le service firewalld
