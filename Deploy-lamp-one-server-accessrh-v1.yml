@@ -11,13 +11,14 @@
     - name: Inclure les variables web et db
       include_vars: vars/lamp-var-all.yml
 
-    - name: Inclure les taches d'attachement a Satellite
+    - name: Inclure les taches d'attachement a la souscription
       include: tasks/task-attach-access-rh.yml
 
     - name: Installer les packages web
       yum:
-        name: "{{ web_packages }}"
+        name: "{{ item }}"
         state: present
+      with_items: "{{ web_packages }}"
 
     - name: Installer la page index
       template:
@@ -73,8 +74,9 @@
 
     - name: Installer les packages db
       yum:
-        name: "{{ db_packages }}"
+        name: "{{ item }}"
         state: present
+      with_items: "{{ db_packages }}"
 
 
     - name: Activer le service firewalld
