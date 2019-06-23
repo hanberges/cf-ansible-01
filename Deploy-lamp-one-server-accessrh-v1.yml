@@ -21,7 +21,7 @@
 #        use_backend: yum
 
     - name: Installer les packages web
-      shell: yum -y install "{{ web_packages_shell}}"
+      shell: "yum -y install {{ web_packages_shell }}"
 
     - name: Installer la page index
       template:
@@ -82,7 +82,7 @@
   #      use_backend: yum
 
     - name: Installer les packages db
-      shell: yum -y install "{{ db_packages_shell}}"
+      shell: "yum -y install {{ db_packages_shell }}"
 
 
     - name: Activer le service firewalld

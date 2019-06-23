@@ -13,7 +13,7 @@ web_packages:
   - libsemanage-python
   - firewalld
 
-web_packages_shell: "httpd php php-mysql libsemanage-python firewalld"
+web_packages_shell: httpd php php-mysql libsemanage-python firewalld
 
 index_src: "jinja2/index.php.j2"
 
@@ -28,7 +28,7 @@ db_packages:
   - php-mysql
   - firewalld
 
-db_packages_shell: "mariadb mariadb-server MySQL-python"
+db_packages_shell: mariadb mariadb-server MySQL-python
 
 firewall_services_db:
   - mysql
