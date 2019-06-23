@@ -14,12 +14,14 @@
     - name: Inclure les taches d'attachement a la souscription
       include: tasks/task-attach-access-rh.yml
 
-    - name: Installer les packages web
-      yum:
-        name: "{{ web_packages }}"
-        state: present
-        use_backend: yum
+#    - name: Installer les packages web
+#      yum:
+#        name: "{{ web_packages }}"
+#        state: present
+#        use_backend: yum
 
+    - name: Installer les packages web
+      shell: yum -y install "{{ web_packages_shell}}"
 
     - name: Installer la page index
       template:
@@ -73,12 +75,14 @@
   #      name: "{{ lib_db }}"
   #      state: absent
 
-    - name: Installer les packages db
-      yum:
-        name: "{{ db_packages }}"
-        state: present
-        use_backend: yum
+  #  - name: Installer les packages db
+  #    yum:
+  #      name: "{{ db_packages }}"
+  #      state: present
+  #      use_backend: yum
 
+    - name: Installer les packages db
+      shell: yum -y install "{{ db_packages_shell}}"
 
 
     - name: Activer le service firewalld
