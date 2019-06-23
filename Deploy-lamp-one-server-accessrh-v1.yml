@@ -18,6 +18,7 @@
       yum:
         name: "{{ web_packages }}"
         state: present
+        use_backend: yum
 
 
     - name: Installer la page index
@@ -76,7 +77,8 @@
       yum:
         name: "{{ db_packages }}"
         state: present
-      
+        use_backend: yum
+
 
 
     - name: Activer le service firewalld
